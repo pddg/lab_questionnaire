@@ -22,7 +22,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../lab_questionnaire\templates" />
+        <option value="$MODULE_DIR$/src/lab_questionnaire/questionnaire/templates" />
+        <option value="$MODULE_DIR$/src/lab_questionnaire/accounts/templates" />
       </list>
     </option>
   </component>
