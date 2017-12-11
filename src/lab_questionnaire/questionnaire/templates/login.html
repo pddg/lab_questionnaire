@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load bootstrap %}
+{% block title %}研究室希望調査 - ログイン{% endblock %}
+{% block content %}
+    <div class="row">
+        <div class="col-sm-8 offset-sm-2">
+            <h3>ログイン</h3>
+            <hr>
+            <form method="post">
+                {% csrf_token %}
+                {{ form|bootstrap }}
+                <button type="submit" class="btn btn-primary float-sm-right">ログイン</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

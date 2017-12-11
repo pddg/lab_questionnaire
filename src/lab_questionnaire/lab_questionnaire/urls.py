@@ -19,6 +19,6 @@ from django.conf.urls import include, url
 import questionnaire.urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path(r'admin/', admin.site.urls),
     path('', include(questionnaire.urls))
 ]
