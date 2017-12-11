@@ -117,10 +117,19 @@ AUTH_USER_MODEL = 'accounts.MyUser'
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 
+# メール用の設定を環境変数から読み出す
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = int(os.environ["EMAIL_PORT"])
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+EMAIL_USE_TLS = os.environ["EMAIL_USE_TLS"] == "True"
+EMAIL_ADDRESS = os.environ["EMAIL_ADDRESS"]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
 
 # 環境固有の設定など TODO: リリース時には環境変数化したい
-EMAIL_PREFIX = r'edu.kit.ac.jp'
+EMAIL_PREFIX = r'@edu.kit.ac.jp'
+BASE_URI = r'127.0.0.1:8000'

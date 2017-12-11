@@ -31,3 +31,9 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'student_number'
 
     objects = MyUserManager()
+
+    def __str__(self):
+        return self.student_number
+
+    class Meta:
+        verbose_name = u"ユーザ"

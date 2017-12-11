@@ -28,27 +28,29 @@
                     <thead>
                     <tr>
                         <th>研究室</th>
-                        <th class="text-right">希望 / 定員</th>
                         <th>希望者</th>
+                        <th class="text-right">希望 / 定員</th>
                     </tr>
                     </thead>
                     <tbody>
                     {% for obj in object_list %}
                         <tr>
                             <th scope="row">{{ obj }}</th>
-                            <td class="text-right">
-                                {{ obj.first_choiced_user.count }} / {{ obj.capacity }}
-                            </td>
                             <td>
                                 {% for people in obj.first_choiced_user.all %}
                                     {{ people }}
                                 {% endfor %}
+                            </td>
+                            <td class="text-right">
+                                {{ obj.first_choiced_user.count }} / {{ obj.capacity }}
                             </td>
                         </tr>
                     {% endfor %}
                     </tbody>
                 </table>
             </div>
+        {% else %}
+            <p>ログインしてください。アカウントをお持ちでない方はメニューからアカウントを作成してください。</p>
         {% endif %}
     </div>
 {% endblock %}

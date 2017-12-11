@@ -9,38 +9,32 @@
 </head>
 <body>
 <nav class="navbar navbar-toggleable-sm navbar-light bg-faded" style="margin-bottom: 20px">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
     <a class="navbar-brand" href="{% url 'top_page' %}">研究室希望調査</a>
-    <ul class="nav navbar-nav ml-auto">
-        {% if user.is_authenticated %}
-            <li class="nav-item">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-outline-info dropdown-toggle navbar-btn"
-                            data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        {{ user.get_username }} : 操作 <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <a href="{% url 'edit_profile' %}" class="dropdown-item">データ編集</a>
-                        {% if user.is_superuser %}
-                            <a href="{% url 'admin:index' %}" class="dropdown-item">Admin</a>
-                        {% endif %}
-                        <a href="{% url 'logout' %}" class="dropdown-item">ログアウト</a>
-                    </ul>
-                </div>
-            </li>
-        {% else %}
-            <li class="nav-item">
-                <a href="#" class="btn btn-outline-success">アカウント作成</a>
-            </li>
-            <li class="nav-item">
-                <a href="{% url 'login' %}" class="btn btn-outline-primary">ログイン</a>
-            </li>
-        {% endif %}
-    </ul>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+            {% if user.is_authenticated %}
+                <span class="nav-item nav-link">{{ user }} でログインしています</span>
+                <a class="nav-item nav-link" href="{% url 'edit_profile' %}">データ編集</a>
+                {% if user.is_superuser %}
+                    <a class="nav-item nav-link" href="{% url 'admin:index' %}">admin</a>
+                {% endif %}
+                <a class="nav-item nav-link" href="{% url 'password_change' %}">パスワード変更</a>
+                <a class="nav-item nav-link" href="{% url 'logout' %}">ログアウト</a>
+            {% else %}
+                <a class="nav-item nav-link" href="{% url 'register' %}">アカウント作成</a>
+                <a class="nav-item nav-link" href="{% url 'login' %}">ログイン</a>
+            {% endif %}
+        </div>
+    </div>
 </nav>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-10 offset-sm-1">
+        <div class="col-sm-10 offset-sm-1" style="margin-bottom: 20px">
             {% block content %}{% endblock %}
         </div>
     </div>
