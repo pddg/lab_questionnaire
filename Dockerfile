@@ -16,7 +16,7 @@ RUN git clone https://github.com/erscl/lab_questionnaire.git /home
 
 RUN pip3 install -r /home/requirements.txt
 
-CMD ["uwsgi", "--ini", "/home/uwsgi.ini"]
+CMD ["/bin/bash", "/home/entrypoint.sh"]
 
 EXPOSE 8000
 #EXPOSE 443
