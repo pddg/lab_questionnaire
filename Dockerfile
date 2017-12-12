@@ -7,6 +7,7 @@ RUN apt-get update && apt-get install -y \
     python3-dev \
     python3-setuptools \
     git \
+    locales \
   && rm -rf /var/lib/apt/lists/*
 
 RUN locale-gen "en_US.UTF-8"
