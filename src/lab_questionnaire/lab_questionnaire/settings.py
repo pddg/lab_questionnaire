@@ -26,7 +26,7 @@ FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
 SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = (os.environ["DEBUG"] == "True")
 
 ALLOWED_HOSTS = [BASE_URI.split("/")[0].split(":")[0]]
 
@@ -132,7 +132,7 @@ EMAIL_HOST = os.environ["EMAIL_HOST"]
 EMAIL_PORT = int(os.environ["EMAIL_PORT"])
 EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
 EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
-EMAIL_USE_TLS = os.environ["EMAIL_USE_TLS"] == "True"
+EMAIL_USE_TLS = (os.environ["EMAIL_USE_TLS"] == "True")
 EMAIL_ADDRESS = os.environ["EMAIL_ADDRESS"]
 
 # Static files (CSS, JavaScript, Images)
