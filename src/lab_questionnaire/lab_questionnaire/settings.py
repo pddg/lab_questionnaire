@@ -15,18 +15,20 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# 環境固有値　サブディレクトリなど含む
+BASE_URI = os.environ["BASE_URI"]
+FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '*1qlm$wyb8o+v24&o8o=sndlc&z%3&i(7+m+ib+mp7%b)8p2g3'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ["0.0.0.0"]
-
+ALLOWED_HOSTS = [BASE_URI.split("/")[0].split(":")[0]]
 
 # Application definition
 
@@ -37,8 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'accounts',
+    'bootstrapform',
     'questionnaire',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -71,17 +74,19 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'lab_questionnaire.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
+
+DB_DIR = os.path.join(BASE_DIR, 'database')
+if not os.path.exists(DB_DIR):
+    os.path.mkdir(DB_DIR)
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DB_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -101,13 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
 LANGUAGE_CODE = 'ja-JP'
 
-TIME_ZONE = 'Tokyo'
+TIME_ZONE = 'Asia/Tokyo'
 
 USE_I18N = True
 
@@ -115,8 +119,23 @@ USE_L10N = True
 
 USE_TZ = True
 
+# 環境固有の設定など TODO: リリース時には環境変数化したい
+EMAIL_PREFIX = r'@edu.kit.ac.jp'
+
+# 認証用ユーザモデルをカスタムする
+AUTH_USER_MODEL = 'accounts.MyUser'
+LOGIN_URL = FORCE_SCRIPT_NAME + '/login/'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
+
+# メール用の設定を環境変数から読み出す
+EMAIL_HOST = os.environ["EMAIL_HOST"]
+EMAIL_PORT = int(os.environ["EMAIL_PORT"])
+EMAIL_HOST_USER = os.environ["EMAIL_HOST_USER"]
+EMAIL_HOST_PASSWORD = os.environ["EMAIL_HOST_PASSWORD"]
+EMAIL_USE_TLS = os.environ["EMAIL_USE_TLS"] == "True"
+EMAIL_ADDRESS = os.environ["EMAIL_ADDRESS"]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = os.environ["STATIC_URL"]

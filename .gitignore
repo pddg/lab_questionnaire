@@ -219,3 +219,4 @@ venv.bak/
 # mypy
 .mypy_cache/
 
+src/lab_questionnaire/db.sqlite3
