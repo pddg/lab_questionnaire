@@ -9,7 +9,7 @@
             <form method="post">
                 {% csrf_token %}
                 {{ form|bootstrap }}
-                <button type="submit" class="btn btn-primary float-xs-right">ログイン</button>
+                <button type="submit" class="btn btn-primary float-right">ログイン</button>
             </form>
             <a href="{% url 'password_reset' %}">パスワードの再発行</a>
         </div>
