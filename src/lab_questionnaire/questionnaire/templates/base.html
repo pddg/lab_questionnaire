@@ -16,7 +16,7 @@
     </button>
     <a class="navbar-brand" href="{% url 'top_page' %}">研究室希望調査</a>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
+        <div class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
                 <span class="nav-item nav-link">{{ user }} でログインしています</span>
                 <a class="nav-item nav-link" href="{% url 'edit_profile' %}">データ編集</a>

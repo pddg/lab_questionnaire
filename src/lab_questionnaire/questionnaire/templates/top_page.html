@@ -27,6 +27,7 @@
                 <table class="table">
                     <thead>
                     <tr>
+                        <th class="text-center">#</th>
                         <th>研究室</th>
                         <th>希望者</th>
                         <th class="text-right">希望 / 定員</th>
@@ -35,7 +36,8 @@
                     <tbody>
                     {% for obj in object_list %}
                         <tr>
-                            <th scope="row">{{ obj }}</th>
+                            <th scope="row" class="text-center">{{ obj.number }}</th>
+                            <th>{{ obj }}</th>
                             <td>
                                 {% for people in obj.first_choiced_user.all %}
                                     {{ people }}
