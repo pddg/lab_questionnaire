@@ -79,7 +79,7 @@ WSGI_APPLICATION = 'lab_questionnaire.wsgi.application'
 
 DB_DIR = os.path.join(BASE_DIR, 'database')
 if not os.path.exists(DB_DIR):
-    os.path.mkdir(DB_DIR)
+    os.mkdir(DB_DIR)
 
 DATABASES = {
     'default': {
