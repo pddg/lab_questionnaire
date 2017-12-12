@@ -1,5 +1,6 @@
 FROM ubuntu:16.04
 
+
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
@@ -8,13 +9,15 @@ RUN apt-get update && apt-get install -y \
     git \
   && rm -rf /var/lib/apt/lists/*
 
+RUN locale-gen "en_US.UTF-8"
+ENV LC_ALL "en_US.UTF-8"
 
 RUN pip3 install uwsgi
 
-#ADD * /home/
 RUN git clone https://github.com/erscl/lab_questionnaire.git /home
 
 RUN pip3 install -r /home/requirements.txt
+
 
 CMD ["/bin/bash", "/home/entrypoint.sh"]
 
