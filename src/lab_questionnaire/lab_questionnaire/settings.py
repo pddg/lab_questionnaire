@@ -17,13 +17,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 環境固有値　サブディレクトリなど含む
 BASE_URI = os.environ["BASE_URI"]
+FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# TODO: リリース時には環境変数化
-SECRET_KEY = '*1qlm$wyb8o+v24&o8o=sndlc&z%3&i(7+m+ib+mp7%b)8p2g3'
+SECRET_KEY = os.environ["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -77,10 +77,14 @@ WSGI_APPLICATION = 'lab_questionnaire.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+DB_DIR = os.path.join(BASE_DIR, 'database')
+if not os.path.exists(DB_DIR):
+    os.path.mkdir(DB_DIR)
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'NAME': os.path.join(DB_DIR, 'db.sqlite3'),
     }
 }
 
@@ -117,14 +121,11 @@ USE_TZ = True
 
 # 環境固有の設定など TODO: リリース時には環境変数化したい
 EMAIL_PREFIX = r'@edu.kit.ac.jp'
-# FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
-FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
-USE_X_FORWARDED_HOST = True
 
 # 認証用ユーザモデルをカスタムする
 AUTH_USER_MODEL = 'accounts.MyUser'
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = FORCE_SCRIPT_NAME + '/login/'
+LOGIN_REDIRECT_URL = FORCE_SCRIPT_NAME + '/'
 
 # メール用の設定を環境変数から読み出す
 EMAIL_HOST = os.environ["EMAIL_HOST"]
