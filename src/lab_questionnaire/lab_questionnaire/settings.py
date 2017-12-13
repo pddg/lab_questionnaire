@@ -17,7 +17,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # 環境固有値　サブディレクトリなど含む
 BASE_URI = os.environ["BASE_URI"]
-FORCE_SCRIPT_NAME = "/" + "/".join(BASE_URI.split("/")[1:])
+FORCE_SCRIPT_NAME = "/".join(BASE_URI.split("/")[1:])
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
