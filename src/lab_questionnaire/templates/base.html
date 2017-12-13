@@ -18,13 +18,15 @@
     <a class="navbar-brand" href="{% url 'top_page' %}">研究室希望調査</a>
     <div class="collapse navbar-collapse" id="navbarAction">
         <ul class="navbar-nav ml-auto">
-            {% if user.is_staff %}
+            {% if user.is_authenticated %}
                 <li class="nav-item">
                     <span class="nav-link active">{{ user }}</span>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'admin:index' %}">管理ページ</a>
-                </li>
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'admin:index' %}">管理ページ</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'edit_profile' %}">データ編集</a>
                 </li>
