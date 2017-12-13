@@ -43,9 +43,10 @@
                             <tbody>
                             {% for obj in object_list %}
                                 <tr>
-                                    <th scope="row" rowspan="2" class="text-center">{{ obj.number }}</th>
+                                    <th scope="row" rowspan="2" class="text-center"
+                                        style="white-space: nowrap; width: 10px;">{{ obj.number }}</th>
                                     <th>{{ obj }}</th>
-                                    <td class="text-right">
+                                    <td class="text-right" style="white-space: nowrap; width: 10px;">
                                         {{ obj.first_choiced_user.count }} / {{ obj.capacity }}
                                     </td>
                                 </tr>
