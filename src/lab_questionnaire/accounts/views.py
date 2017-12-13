@@ -1,9 +1,9 @@
+import re
 from django.views.generic import TemplateView, UpdateView, ListView, FormView, CreateView
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm, PasswordResetForm
 from django import forms
 from .models import MyUser
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-import re
 from django.conf import settings
 from django.core.mail import send_mail
 from django.contrib.auth.tokens import default_token_generator
