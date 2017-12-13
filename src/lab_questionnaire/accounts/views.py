@@ -43,7 +43,7 @@ class RegisterView(CreateView):
         message_template = get_template('accounts/register_message.txt')
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
-            'base_uri': settings.BASE_URI,
+            'base_uri': settings.BASE_URI.split("/")[0],
             'uid': force_text(urlsafe_base64_encode(force_bytes(user.pk))),
             'token': default_token_generator.make_token(user),
             'user': user,
@@ -111,7 +111,7 @@ class PasswordResetView(FormView):
         message_template = get_template('accounts/password_reset_message.txt')
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
-            'base_uri': settings.BASE_URI,
+            'base_uri': settings.BASE_URI.split("/")[0],
             'uid': force_text(urlsafe_base64_encode(force_bytes(user.pk))),
             'token': default_token_generator.make_token(user),
             'user': user,
