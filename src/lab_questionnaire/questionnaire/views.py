@@ -6,12 +6,12 @@ from .models import StudyOffice
 
 
 class TopPageView(ListView):
-    template_name = "top_page.html"
+    template_name = "questionnaire/top_page.html"
     model = StudyOffice
 
 
 class EditProfileView(UpdateView):
-    template_name = "edit_profile.html"
+    template_name = "questionnaire/edit_profile.html"
     fields = ("first_choice",)
 
     def get_object(self, queryset=None):

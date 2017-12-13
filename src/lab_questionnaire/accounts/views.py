@@ -30,7 +30,7 @@ class RegisterForm(UserCreationForm):
 
 
 class RegisterView(CreateView):
-    template_name = 'register.html'
+    template_name = 'accounts/register.html'
     form_class = RegisterForm
 
     def form_valid(self, form):
@@ -39,8 +39,8 @@ class RegisterView(CreateView):
         result = super().form_valid(form)
 
         user = MyUser.objects.get(pk=user.pk)
-        subject_template = get_template('register_subject.txt')
-        message_template = get_template('register_message.txt')
+        subject_template = get_template('accounts/register_subject.txt')
+        message_template = get_template('accounts/register_message.txt')
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
             'base_uri': settings.BASE_URI,
@@ -60,11 +60,11 @@ class RegisterView(CreateView):
 
 
 class RegisterDoneView(TemplateView):
-    template_name = 'register_done.html'
+    template_name = 'accounts/register_done.html'
 
 
 class RegisterCompleteView(TemplateView):
-    template_name = 'register_complete.html'
+    template_name = 'accounts/register_complete.html'
 
     def get(self, request, **kwargs):
         token = kwargs.get('token')
@@ -100,15 +100,15 @@ class MyPasswordResetForm(forms.Form):
 
 
 class PasswordResetView(FormView):
-    template_name = 'password_reset.html'
+    template_name = 'accounts/password_reset.html'
     form_class = MyPasswordResetForm
 
     def form_valid(self, form):
         result = super().form_valid(form)
         student_number = form.data.get("student_number")
         user = MyUser.objects.get(student_number=student_number)
-        subject_template = get_template('password_reset_subject.txt')
-        message_template = get_template('password_reset_message.txt')
+        subject_template = get_template('accounts/password_reset_subject.txt')
+        message_template = get_template('accounts/password_reset_message.txt')
         context = {
             'protocol': 'https' if self.request.is_secure() else 'http',
             'base_uri': settings.BASE_URI,
