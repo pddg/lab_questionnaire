@@ -20,11 +20,14 @@
                         </p>
                         <h5 class="card-title">第一希望研究室</h5>
                         <p class="card-text">
+                            <span {% if user.first_choice.first_choiced_user.count > user.first_choice.capacity %}
+                                class="text-danger"{% endif %}>
                             {% if user.first_choice %}
                                 {{ user.first_choice }}
                             {% else %}
                                 未選択
                             {% endif %}
+                            </span>
                         </p>
                     </div>
                 </div>
@@ -39,42 +42,23 @@
                                 ダウンロード
                             </button>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="{% url 'result_download' type='xlsx' %}">Excel</a>
+                                <a class="dropdown-item"
+                                   href="{% url 'result_download' type='xlsx' %}">Excel</a>
                                 <a class="dropdown-item" href="{% url 'result_download' type='csv' %}">CSV</a>
                             </div>
                         </div>
-
+                        {% block list_tab %}{% endblock %}
                     </div>
                     <div class="card-block">
-                        <h5 class="card-title">希望状況一覧</h5>
-                        <table class="table card-text">
-                            <tbody>
-                            {% for obj in object_list %}
-                                <tr>
-                                    <th scope="row" rowspan="2" class="text-center"
-                                        style="white-space: nowrap; width: 10px;">{{ obj.number }}</th>
-                                    <th>{{ obj }}</th>
-                                    <td class="text-right" style="white-space: nowrap; width: 10px;">
-                                        {{ obj.first_choiced_user.count }} / {{ obj.capacity }}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        {% for people in obj.first_choiced_user.all %}
-                                            {% if people.display_name %}
-                                                {{ people.display_name }}
-                                            {% else %}
-                                                {{ people.student_number }}
-                                            {% endif %}
-                                        {% empty %}
-                                            （希望者なし）
-                                        {% endfor %}
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                            </tbody>
-                        </table>
+                        <p class="card-text">
+                            表示されていないデータがある場合、Excelデータでダウンロードすると全データが閲覧できます。
+                        </p>
+                        <p class="text-danger">
+                            個人情報の取り扱いは十分注意してください。
+                        </p>
                     </div>
+                    {% block list_content %}
+                    {% endblock %}
                 </div>
             </div>
         {% else %}

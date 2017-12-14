@@ -1,0 +1,53 @@
+{% extends 'questionnaire/top_page.html' %}
+{% block list_tab %}
+    <ul class="nav nav-tabs card-header-tabs" style="margin-top: 15px;">
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'top_page' %}">研究室</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'top_page_students' %}">学生</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block list_content %}
+    <div class="table-responsive card-text">
+        <table class="table" id="dataTable">
+            <thead>
+            <tr>
+                <th>学生</th>
+                <th style="white-space: nowrap; width: 10px;">希望研究室</th>
+                <th class="text-right" style="white-space: nowrap; width: 10px;">#</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for obj in object_list %}
+                <tr {% if obj.first_choice.first_choiced_user.count > obj.first_choice.capacity %}class="text-danger"{% endif %}>
+                    <th>{{ obj.student_number }}
+                        {% if obj.display_name %}
+                            ({{ obj.display_name }})
+                        {% endif %}</th>
+                    <td>{{ obj.first_choice.name }}</td>
+                    <td class="text-right">{{ obj.first_choice.number }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css">
+{% endblock %}
+{% block scripts %}
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#dataTable').DataTable({
+                "paging": false,
+                "ordering": true,
+                "info": false,
+                "searching": false
+            });
+        });
+    </script>
+{% endblock %}
+

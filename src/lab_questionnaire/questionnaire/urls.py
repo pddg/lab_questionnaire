@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import TopPageView, EditProfileView, ResultDownloadView
+from .views import TopPageView, TopPageStudentsView, EditProfileView, ResultDownloadView
 from django.views.generic import CreateView
 from django.contrib.auth.views import login, logout, password_change, password_change_done
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +7,9 @@ from django.contrib.auth.forms import UserCreationForm
 urlpatterns = [
     path('', TopPageView.as_view(),
          name='top_page'),
+
+    path('students/', TopPageStudentsView.as_view(),
+         name='top_page_students'),
 
     path(r'profile/', EditProfileView.as_view(),
          name='edit_profile'),

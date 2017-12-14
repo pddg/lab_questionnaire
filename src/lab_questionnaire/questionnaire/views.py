@@ -8,11 +8,17 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.http import Http404
 from .models import StudyOffice
+from accounts.models import MyUser
 
 
 class TopPageView(ListView):
-    template_name = "questionnaire/top_page.html"
+    template_name = "questionnaire/top_page_labo.html"
     model = StudyOffice
+
+
+class TopPageStudentsView(ListView):
+    template_name = "questionnaire/top_page_students.html"
+    model = MyUser
 
 
 class EditProfileView(UpdateView):

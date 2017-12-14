@@ -1,0 +1,55 @@
+{% extends 'questionnaire/top_page.html' %}
+{% block list_tab %}
+    <ul class="nav nav-tabs card-header-tabs" style="margin-top: 15px;">
+        <li class="nav-item">
+            <a class="nav-link active" href="{% url 'top_page' %}">研究室</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'top_page_students' %}">学生</a>
+        </li>
+    </ul>
+{% endblock %}
+{% block list_content %}
+    <div class="table-responsive card-text">
+        <table class="table">
+            <tbody>
+            {% for obj in object_list %}
+                <tr>
+                    <th scope="row" rowspan="2" class="text-center"
+                        style="white-space: nowrap; width: 10px;">
+                        <span {% if obj.first_choiced_user.count > obj.capacity %}class="text-danger"{% endif %}>
+                            {{ obj.number }}
+                        </span>
+                    </th>
+                    <th>
+                        <span {% if obj.first_choiced_user.count > obj.capacity %}
+                            class="text-danger"{% endif %}>
+                            {{ obj }}
+                        </span>
+                    </th>
+                    <td class="text-right" style="white-space: nowrap; width: 10px;">
+                        <span {% if obj.first_choiced_user.count > obj.capacity %}class="text-danger"{% endif %}>
+                        {{ obj.first_choiced_user.count }} / {{ obj.capacity }}
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <span {% if obj.first_choiced_user.count > obj.capacity %}class="text-danger"{% endif %}>
+                        {% for people in obj.first_choiced_user.all %}
+                            {% if people.display_name %}
+                                {{ people.display_name }}
+                            {% else %}
+                                {{ people.student_number }}
+                            {% endif %}
+                        {% empty %}
+                            （希望者なし）
+                        {% endfor %}
+                        </span>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
