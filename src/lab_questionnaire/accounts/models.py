@@ -24,6 +24,7 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     # アンケートデータ
+    display_name = models.CharField(max_length=16, null=True, blank=True, verbose_name=u"表示名", help_text=u"集計ページで学生IDの代わりに表示されます。（任意）")
     gpa = models.FloatField(default=0, verbose_name=u"GPA")
     first_choice = models.ForeignKey(StudyOffice, related_name="first_choiced_user",
                                      null=True, blank=True, on_delete=models.SET_NULL, verbose_name=u"第一希望研究室")

@@ -17,7 +17,7 @@ class TopPageView(ListView):
 
 class EditProfileView(UpdateView):
     template_name = "questionnaire/edit_profile.html"
-    fields = ("first_choice",)
+    fields = ("display_name", "first_choice")
 
     def get_object(self, queryset=None):
         return self.request.user

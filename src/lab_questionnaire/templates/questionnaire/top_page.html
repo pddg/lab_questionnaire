@@ -10,6 +10,14 @@
                         <a href="{% url 'edit_profile' %}" class="btn btn-sm btn-info float-right">編集</a>
                     </div>
                     <div class="card-block">
+                        <h5 class="card-title">表示名</h5>
+                        <p class="card-text">
+                            {% if user.display_name %}
+                                {{ user.display_name }}
+                            {% else %}
+                                なし（学生ID）
+                            {% endif %}
+                        </p>
                         <h5 class="card-title">第一希望研究室</h5>
                         <p class="card-text">
                             {% if user.first_choice %}
@@ -53,7 +61,11 @@
                                 <tr>
                                     <td colspan="2">
                                         {% for people in obj.first_choiced_user.all %}
-                                            {{ people }}
+                                            {% if people.display_name %}
+                                                {{ people.display_name }}
+                                            {% else %}
+                                                {{ people.student_number }}
+                                            {% endif %}
                                         {% empty %}
                                             （希望者なし）
                                         {% endfor %}
