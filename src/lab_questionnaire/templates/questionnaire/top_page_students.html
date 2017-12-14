@@ -26,7 +26,7 @@
                     <th style="white-space: nowrap; width: 10px;">{{ obj.student_number }}</th>
                     <td style="white-space: nowrap; width: 10px;">
                         {% if obj.display_name %}
-                            ({{ obj.display_name }})
+                            {{ obj.display_name }}
                         {% endif %}
                     </td>
                     <td class="text-right" style="white-space: nowrap; width: 10px;">{{ obj.first_choice.number }}</td>
