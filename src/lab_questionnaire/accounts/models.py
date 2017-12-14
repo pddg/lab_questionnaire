@@ -37,4 +37,5 @@ class MyUser(AbstractBaseUser, PermissionsMixin):
         return self.student_number
 
     class Meta:
+        ordering = ['student_number']
         verbose_name = u"ユーザ"

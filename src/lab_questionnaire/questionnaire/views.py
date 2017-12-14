@@ -41,6 +41,7 @@ class ResultDownloadView(TemplateView):
         # ユーザデータのテーブルを作る（詳細データ）
         user_table_header = [
             u"学生ID",
+            u"表示名",
             u"研究室番号",
             u"研究室名",
             u"希望者数",
@@ -52,6 +53,7 @@ class ResultDownloadView(TemplateView):
             if user.is_active:
                 user_table_data.append([
                     user.student_number,
+                    user.display_name if user.display_name is not None else "-",
                     user.first_choice.number if user.first_choice is not None else "-",
                     user.first_choice.name if user.first_choice is not None else "-",
                     user.first_choice.first_choiced_user.count() if user.first_choice is not None else "-",
@@ -59,7 +61,7 @@ class ResultDownloadView(TemplateView):
                     "作成者" if user.is_superuser else "管理者" if user.is_staff else "-",
                 ])
         user_table = pd.DataFrame(data=user_table_data, columns=user_table_header)
-        user_table.sort_values(by=[u"研究室番号", u"学生ID"], ascending=True)
+        user_table = user_table.sort_values(by=[u"研究室番号", u"学生ID"], ascending=True)
 
         # 研究室データのテーブルを作る（統計データ）
         study_office_table_header = [
