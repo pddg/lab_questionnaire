@@ -90,8 +90,8 @@ class ResultDownloadView(TemplateView):
         if output_type == "xlsx":
             with io.BytesIO() as buf:
                 with pd.ExcelWriter(buf, engine='xlsxwriter') as writer:
-                    user_table.to_excel(writer, sheet_name='学生データ', index=False)
-                    study_office_table.to_excel(writer, sheet_name='研究室データ', index=False)
+                    user_table.to_excel(writer, sheet_name=u'学生データ', index=False)
+                    study_office_table.to_excel(writer, sheet_name=u'研究室データ', index=False)
                     writer.save()
                 response = HttpResponse(
                     buf.getvalue(),
