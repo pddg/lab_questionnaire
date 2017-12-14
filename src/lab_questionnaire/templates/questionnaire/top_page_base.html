@@ -4,20 +4,26 @@
     <div class="row">
         {% if user.is_authenticated %}
             <div class="col-md-12" style="margin-bottom: 20px;">
-{#            ここ、告知領域にする。adminから書けたほうがいいけど今後の課題。#}
+                {#            ここ、告知領域にする。adminから書けたほうがいいけど今後の課題。#}
                 <div class="card card-inverse card-info">
-                    <div class="card-header">
-                        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
-                           aria-controls="collapseOne" class="text-white">
-                            メンテナンスについて
-                        </a>
-                    </div>
-                    <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne">
+                    <a data-toggle="collapse" href="#collapseOne" aria-expanded="true"
+                       aria-controls="collapseOne" class="card-header text-white">
+                        メンテナンスについて
+                    </a>
+                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne">
                         <div class="card-block">
                             <blockquote class="card-blockquote">
                                 <p>12/14～15日にかけて、メンテナンスのため繋がりにくい状態になっていました。ご迷惑をおかけしました。</p>
-                                <p>今後共にメンテナンスが発生した場合、エラー番号500, 502が表示される場合があります。1, 2分おけば繋がる場合が多いですが、頻繁に発生するなどの場合はtwitterかm6622036の学内メールまでご連絡ください。</p>
-                                <footer>2017/12/15</footer>
+                                <p>今後共にメンテナンスが発生した場合、エラー番号500, 502が表示される場合があります。1,
+                                    2分おけば繋がる場合が多いですが、頻繁に発生するなどの場合はtwitterかm6622036の学内メールまでご連絡ください。</p>
+                                <footer>2017/12/15
+                                    <a href="#collapseOne"
+                                       class="float-right text-white"
+                                       data-toggle="collapse"
+                                       controls="collapseOne"
+                                    >閉じる</a>
+                                </footer>
+
                             </blockquote>
                         </div>
                     </div>
