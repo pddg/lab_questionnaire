@@ -14,20 +14,20 @@
         <table class="table" id="dataTable">
             <thead>
             <tr>
-                <th>学生</th>
-                <th style="white-space: nowrap; width: 10px;">希望研究室</th>
-                <th class="text-right" style="white-space: nowrap; width: 10px;">#</th>
+                <th style="white-space: nowrap; width: 10px;">学生</th>
+                <th class="text-right" style="white-space: nowrap; width: 10px;"#</th>
+                <th>希望研究室</th>
             </tr>
             </thead>
             <tbody>
             {% for obj in object_list %}
                 <tr {% if obj.first_choice.first_choiced_user.count > obj.first_choice.capacity %}class="text-danger"{% endif %}>
-                    <th>{{ obj.student_number }}
+                    <th style="white-space: nowrap; width: 10px;">{{ obj.student_number }}
                         {% if obj.display_name %}
                             ({{ obj.display_name }})
                         {% endif %}</th>
-                    <td>{{ obj.first_choice.name }}</td>
                     <td class="text-right">{{ obj.first_choice.number }}</td>
+                    <td style="white-space: nowrap; width: 10px;">{{ obj.first_choice.name }}</td>
                 </tr>
             {% endfor %}
             </tbody>
