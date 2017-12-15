@@ -1,5 +1,5 @@
 import io
-from datetime import datetime, timezone
+from datetime import datetime
 import pandas as pd
 from django.views.generic import TemplateView, UpdateView, ListView, FormView, CreateView
 from django.utils.decorators import method_decorator
@@ -42,8 +42,7 @@ class ResultDownloadView(TemplateView):
 
         output_type = context["type"]
         output_param = "application/force-download"
-        name = "lab_questionnaire_result" + "_" + \
-               datetime.now().astimezone(timezone('Asia/Tokyo')).strftime('%Y%m%d_%H%M%S') + "." + output_type
+        name = "lab_questionnaire_result" + "_" + datetime.now().strftime('%Y%m%d_%H%M%S') + "." + output_type
 
         # ユーザデータのテーブルを作る（詳細データ）
         user_table_header = [
