@@ -1,5 +1,5 @@
 import io
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import pandas as pd
 from django.views.generic import TemplateView, UpdateView, ListView, FormView, CreateView
 from django.utils.decorators import method_decorator
@@ -9,7 +9,6 @@ from django.http import HttpResponse
 from django.http import Http404
 from .models import StudyOffice
 from accounts.models import MyUser
-
 
 class TopPageView(ListView):
     template_name = "questionnaire/top_page_labo.html"
@@ -42,7 +41,8 @@ class ResultDownloadView(TemplateView):
 
         output_type = context["type"]
         output_param = "application/force-download"
-        name = "lab_questionnaire_result" + "_" + datetime.now().strftime('%Y%m%d_%H%M%S') + "." + output_type
+        name = "lab_questionnaire_result" + "_" + datetime.now(timezone(timedelta(hours=+9))).strftime(
+            '%Y%m%d_%H%M%S') + "." + output_type
 
         # ユーザデータのテーブルを作る（詳細データ）
         user_table_header = [
