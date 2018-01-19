@@ -2,8 +2,34 @@
 {% block content %}
     <div class="row">
         {% if user.is_authenticated %}
-            <div class="col-md-12" style="margin-bottom: 20px;">
+            <div class="col-md-6" style="margin-bottom: 20px;">
+
                 {#            ここ、告知領域にする。adminから書けたほうがいいけど今後の課題。#}
+                <div class="card card-inverse card-warning">
+                    <a data-toggle="collapse" href="#collapseTwo" aria-expanded="true"
+                       aria-controls="collapseTwo" class="card-header text-white">
+                        運用終了について
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo">
+                        <div class="card-block">
+                            <blockquote class="card-blockquote">
+                                <p>配属が大方決まったとのことでしたので、2018年2月16日にシステムの運用を終了し全データを破棄します。</p>
+                                <p>必要なデータがありましたらそれまでに取得しておいてください。</p>
+                                <footer>2018/1/19
+                                    <a href="#collapseTwo"
+                                       class="float-right text-white"
+                                       data-toggle="collapse"
+                                       controls="collapseTwo"
+                                    >閉じる</a>
+                                </footer>
+
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6" style="margin-bottom: 20px;">
                 <div class="card card-inverse card-info">
                     <a data-toggle="collapse" href="#collapseOne" aria-expanded="true"
                        aria-controls="collapseOne" class="card-header text-white">
